@@ -12,5 +12,6 @@ fi
 
 # Use jq to format result to include link to rule page.
 stylelint "${INPUT_STYLELINT_INPUT:-'**/*.css'}" --config="${INPUT_STYLELINT_CONFIG}" -f json \
+  | tee /dev/tty \
   | jq -r '{source: .[].source, warnings:.[].warnings[]} | "\(.source):\(.warnings.line):\(.warnings.column):\(.warnings.severity): \(.warnings.text) [\(.warnings.rule)](https://github.com/stylelint/stylelint/blob/master/lib/rules/\(.warnings.rule)/README.md)"' \
   | reviewdog -efm="%f:%l:%c:%t%*[^:]: %m" -name="stylelint" -reporter=github-pr-check -level="${INPUT_LEVEL}"
