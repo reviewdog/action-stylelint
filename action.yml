@@ -8,6 +8,12 @@ inputs:
   level:
     description: 'Report level for reviewdog [info,warning,error]'
     default: 'error'
+  reporter:
+    description: |
+      Reporter of reviewdog command [github-pr-check,github-pr-review].
+      Default is github-pr-check.
+      github-pr-review can use Markdown and add a link to rule page in reviewdog reports.
+    default: 'github-pr-check'
   stylelint_input:
     description: "Files or glob. Default: `**/*.css`.  It's same as `[input]` of stylelint."
     default: '**/*.css'
@@ -22,6 +28,7 @@ runs:
   args:
     - ${{ inputs.github_token }}
     - ${{ inputs.level }}
+    - ${{ inputs.reporter }}
     - ${{ inputs.stylelint_input }}
     - ${{ inputs.stylelint_config }}
 branding:
