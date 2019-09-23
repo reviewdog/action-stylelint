@@ -7,6 +7,9 @@ This action runs [stylelint](https://github.com/stylelint/stylelint) with
 [reviewdog](https://github.com/reviewdog/reviewdog) on pull requests to improve
 code review experience.
 
+![github-pr-check sample](https://user-images.githubusercontent.com/3797062/65406379-54848e00-de1a-11e9-8464-1037e1cacf80.png)
+![github-pr-review sample](https://user-images.githubusercontent.com/3797062/65406408-6d8d3f00-de1a-11e9-90dd-d39aa3e19e7f.png)
+
 ## Inputs
 
 ### `github_token`
@@ -32,8 +35,6 @@ It's same as `[input]` of stylelint.
 ### `stylelint_config`
 
 Optional. It's same as `--config` flag of stylelint.
-You can use `stylelint-config-recommended`/`stylelint-config-standard` as a shared configuration
-if your project doens't have stylelintrc.
 
 ## Example usage
 
@@ -53,5 +54,4 @@ jobs:
         with:
           github_token: ${{ secrets.github_token }}
           stylelint_input: '**/*.css'
-          stylelint_config: 'stylelint-config-recommended'
 ```
