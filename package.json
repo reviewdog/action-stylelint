@@ -1,0 +1,24 @@
+{
+  "name": "action-stylelint",
+  "version": "1.0.0",
+  "description": "[![Docker Image CI](https://github.com/reviewdog/action-stylelint/workflows/Docker%20Image%20CI/badge.svg)](https://github.com/reviewdog/action-stylelint/actions) [![Release](https://img.shields.io/github/release/reviewdog/action-stylelint.svg?maxAge=43200)](https://github.com/reviewdog/action-stylelint/releases)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/reviewdog/action-stylelint.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/reviewdog/action-stylelint/issues"
+  },
+  "homepage": "https://github.com/reviewdog/action-stylelint#readme",
+  "devDependencies": {
+    "stylelint": "^11.0.0",
+    "stylelint-config-recommended": "^3.0.0"
+  }
+}
