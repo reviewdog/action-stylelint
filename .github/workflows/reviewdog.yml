@@ -1,0 +1,13 @@
+name: reviewdog
+on: [pull_request]
+jobs:
+  stylelint:
+    name: runner / stylelint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: stylelint
+        uses: reviewdog/action-stylelint@v1
+        with:
+          github_token: ${{ secrets.github_token }}
+          stylelint_config: 'stylelint-config-recommended'

@@ -1,0 +1,29 @@
+name: 'Run stylelint with reviewdog'
+description: '🐶 Run stylelint with reviewdog on pull requests to improve code review experience.'
+author: 'haya14busa (reviewdog)'
+inputs:
+  github_token:
+    description: 'GITHUB_TOKEN.'
+    required: true
+  level:
+    description: 'Report level for reviewdog [info,warning,error]'
+    default: 'error'
+  stylelint_input:
+    description: "Files or glob. Default: `**/*.css`.  It's same as `[input]` of stylelint."
+    default: '**/*.css'
+  stylelint_config:
+    description: |
+      It's same as `--config` flag of stylelint. You can use
+      `stylelint-config-recommended`/`stylelint-config-standard` as a shared
+      configuration if your project doens't have stylelintrc."
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.github_token }}
+    - ${{ inputs.level }}
+    - ${{ inputs.stylelint_input }}
+    - ${{ inputs.stylelint_config }}
+branding:
+  icon: 'alert-triangle'
+  color: 'yellow'
