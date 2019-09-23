@@ -8,6 +8,8 @@ if [ ! -f "$(npm bin)/stylelint" ]; then
   npm install
 fi
 
+$(npm bin)/stylelint --version
+
 if [ "${INPUT_REPORTER}" == 'github-pr-review' ]; then
   # Use jq and github-pr-review reporter to format result to include link to rule page.
   $(npm bin)/stylelint "${INPUT_STYLELINT_INPUT:-'**/*.css'}" --config="${INPUT_STYLELINT_CONFIG}" -f json \
