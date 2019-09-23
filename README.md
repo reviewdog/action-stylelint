@@ -38,6 +38,17 @@ Optional. It's same as `--config` flag of stylelint.
 
 ## Example usage
 
+You also need to install [stylelint](https://github.com/stylelint/stylelint).
+
+```shell
+# Example
+$ npm install stylelint stylelint-config-recommended -D
+```
+
+You can create [stylelint
+config](https://github.com/stylelint/stylelint/blob/master/docs/user-guide/configuration.md)
+and this action uses that config too.
+
 ### [.github/workflows/reviewdog.yml](.github/workflows/reviewdog.yml)
 
 ```yml
@@ -53,6 +64,6 @@ jobs:
         uses: reviewdog/action-stylelint@v1
         with:
           github_token: ${{ secrets.github_token }}
-          reporter: github-pr-review # Change reporter. 
+          reporter: github-pr-review # Change reporter.
           stylelint_input: '**/*.css'
 ```
