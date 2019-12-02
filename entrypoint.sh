@@ -17,5 +17,5 @@ if [ "${INPUT_REPORTER}" == 'github-pr-review' ]; then
     | reviewdog -efm="%f:%l:%c:%t%*[^:]: %m" -name="stylelint" -reporter=github-pr-review -level="${INPUT_LEVEL}"
 else
   $(npm bin)/stylelint "${INPUT_STYLELINT_INPUT:-'**/*.css'}" --config="${INPUT_STYLELINT_CONFIG}" \
-    | reviewdog -f="stylelint" -reporter="${INPUT_REPORTER}" -level="${INPUT_LEVEL}"
+    | reviewdog -f="stylelint" -reporter="${INPUT_REPORTER:-'github-pr-check'}" -level="${INPUT_LEVEL}"
 fi
