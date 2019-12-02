@@ -7,12 +7,18 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: stylelint-github-pr-check
-        uses: reviewdog/action-stylelint@v1
+        uses: ./
         with:
           github_token: ${{ secrets.github_token }}
           stylelint_config: 'stylelint-config-recommended'
+      - name: stylelint-github-check
+        uses: ./
+        with:
+          github_token: ${{ secrets.github_token }}
+          reporter: github-check
+          level: warning
       - name: stylelint-github-pr-review
-        uses: reviewdog/action-stylelint@v1
+        uses: ./
         with:
           github_token: ${{ secrets.github_token }}
           reporter: github-pr-review
