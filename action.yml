@@ -10,7 +10,7 @@ inputs:
     default: 'error'
   reporter:
     description: |
-      Reporter of reviewdog command [github-pr-check,github-pr-review].
+      Reporter of reviewdog command [github-pr-check,github-pr-review,github-check].
       Default is github-pr-check.
       github-pr-review can use Markdown and add a link to rule page in reviewdog reports.
     default: 'github-pr-check'
@@ -22,12 +22,6 @@ inputs:
 runs:
   using: 'docker'
   image: 'Dockerfile'
-  args:
-    - ${{ inputs.github_token }}
-    - ${{ inputs.level }}
-    - ${{ inputs.reporter }}
-    - ${{ inputs.stylelint_input }}
-    - ${{ inputs.stylelint_config }}
 branding:
   icon: 'alert-triangle'
   color: 'yellow'
