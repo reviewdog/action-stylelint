@@ -8,6 +8,9 @@ inputs:
   level:
     description: 'Report level for reviewdog [info,warning,error]'
     default: 'error'
+  name:
+    description: 'Report name'
+    default: 'stylelint'
   reporter:
     description: |
       Reporter of reviewdog command [github-pr-check,github-pr-review,github-check].
@@ -19,6 +22,8 @@ inputs:
     default: '**/*.css'
   stylelint_config:
     description: "It's same as `--config` flag of stylelint."
+  stylelint_ignore:
+    description: "Files or glob. It's the same as `--ignore-pattern` of stylelint"
 runs:
   using: 'docker'
   image: 'Dockerfile'
