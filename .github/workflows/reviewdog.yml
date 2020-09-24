@@ -11,17 +11,20 @@ jobs:
         with:
           github_token: ${{ secrets.github_token }}
           stylelint_config: 'stylelint-config-recommended'
+          stylelint_ignore: '/testdata-subproject/'
       - name: stylelint-github-check
         uses: ./
         with:
           github_token: ${{ secrets.github_token }}
           reporter: github-check
           level: warning
+          stylelint_ignore: '/testdata-subproject/'
       - name: stylelint-github-pr-review
         uses: ./
         with:
           github_token: ${{ secrets.github_token }}
           reporter: github-pr-review
+          stylelint_ignore: '/testdata-subproject/'
       - name: stylelint-github-pr-check-subproject
         uses: ./
         with:
