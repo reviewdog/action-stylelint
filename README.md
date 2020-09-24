@@ -39,6 +39,10 @@ It's same as `[input]` of stylelint.
 
 Optional. It's same as `--config` flag of stylelint.
 
+### `workdir`
+
+Optional. The directory from which to look for and run stylelint. Default '.'
+
 ## Example usage
 
 You also need to install [stylelint](https://github.com/stylelint/stylelint).
