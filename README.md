@@ -15,6 +15,11 @@ code review experience.
 
 ## Inputs
 
+### `filter_mode`
+
+Optional. Reviewdog filter mode [added, diff_context, file, nofilter]
+It's the same as the `-filter-mode` flag of reviewdog.
+
 ### `github_token`
 
 **Required**. Must be in form of `github_token: ${{ secrets.github_token }}`'.
