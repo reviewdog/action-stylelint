@@ -11,24 +11,12 @@ if [ ! -f "$(npm bin)/stylelint" ]; then
 fi
 
 if [ -n "${INPUT_PACKAGES}" ]; then
-  echo "Installing packages: ${INPUT_PACKAGES}"
   npm install ${INPUT_PACKAGES}
 fi
 
 $(npm bin)/stylelint --version
 
-echo "Input report: ${INPUT_REPORTER}"
-
-echo "Input stylelint input: ${INPUT_STYLELINT_INPUT}"
-
-echo "Input stylelint config: ${INPUT_STYLELINT_CONFIG}"
-
-echo "Input filter-mode : ${INPUT_FILTER_MODE}"
-
-echo "Input fail-on-error : ${INPUT_FAIL_ON_ERROR}"
-
 if [ "${INPUT_REPORTER}" == 'github-pr-review' ]; then
-  echo "Running github-pr-review"
   $(npm bin)/stylelint "${INPUT_STYLELINT_INPUT:-'**/*.css'}" --config="${INPUT_STYLELINT_CONFIG}" --ignore-pattern="${INPUT_STYLELINT_IGNORE}" -f json \
     | jq -r '.[] | {source: .source, warnings:.warnings[]} | "\(.source):\(.warnings.line):\(.warnings.column):\(.warnings.severity): \(.warnings.text) [\(.warnings.rule)](https://stylelint.io/user-guide/rules/\(.warnings.rule))"'
   # Use jq and github-pr-review reporter to format result to include link to rule page.
