@@ -8,6 +8,9 @@ inputs:
   level:
     description: 'Report level for reviewdog [info,warning,error]'
     default: 'error'
+  fail_on_error:
+    description: 'Whether reviewdog should fail when errors are found. [true,false] - This is useful for failing CI builds.'
+    default: 'false'
   filter_mode:
     description: 'Reviewdog filter mode [added, diff_context, file, nofilter]'
     default: 'added'

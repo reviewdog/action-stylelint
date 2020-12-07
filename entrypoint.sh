@@ -25,6 +25,8 @@ echo "Input stylelint config: ${INPUT_STYLELINT_CONFIG}"
 
 echo "Input filter-mode : ${INPUT_FILTER_MODE}"
 
+echo "Input fail-on-error : ${INPUT_FAIL_ON_ERROR}"
+
 if [ "${INPUT_REPORTER}" == 'github-pr-review' ]; then
   echo "Running github-pr-review"
   $(npm bin)/stylelint "${INPUT_STYLELINT_INPUT:-'**/*.css'}" --config="${INPUT_STYLELINT_CONFIG}" --ignore-pattern="${INPUT_STYLELINT_IGNORE}" -f json \
@@ -32,8 +34,8 @@ if [ "${INPUT_REPORTER}" == 'github-pr-review' ]; then
   # Use jq and github-pr-review reporter to format result to include link to rule page.
   $(npm bin)/stylelint "${INPUT_STYLELINT_INPUT:-'**/*.css'}" --config="${INPUT_STYLELINT_CONFIG}" --ignore-pattern="${INPUT_STYLELINT_IGNORE}" -f json \
     | jq -r '.[] | {source: .source, warnings:.warnings[]} | "\(.source):\(.warnings.line):\(.warnings.column):\(.warnings.severity): \(.warnings.text) [\(.warnings.rule)](https://stylelint.io/user-guide/rules/\(.warnings.rule))"' \
-    | reviewdog -efm="%f:%l:%c:%t%*[^:]: %m" -name="${INPUT_NAME:-stylelint}" -reporter=github-pr-review -level="${INPUT_LEVEL}" -filter-mode="${INPUT_FILTER_MODE}"
+    | reviewdog -efm="%f:%l:%c:%t%*[^:]: %m" -name="${INPUT_NAME:-stylelint}" -reporter=github-pr-review -level="${INPUT_LEVEL}" -filter-mode="${INPUT_FILTER_MODE}" -fail-on-error="${INPUT_FAIL_ON_ERROR}"
 else
   $(npm bin)/stylelint "${INPUT_STYLELINT_INPUT:-'**/*.css'}" --config="${INPUT_STYLELINT_CONFIG}" --ignore-pattern="${INPUT_STYLELINT_IGNORE}" \
-    | reviewdog -f="stylelint" -name="${INPUT_NAME:-stylelint}" -reporter="${INPUT_REPORTER:-github-pr-check}" -level="${INPUT_LEVEL}" -filter-mode="${INPUT_FILTER_MODE}"
+    | reviewdog -f="stylelint" -name="${INPUT_NAME:-stylelint}" -reporter="${INPUT_REPORTER:-github-pr-check}" -level="${INPUT_LEVEL}" -filter-mode="${INPUT_FILTER_MODE}" -fail-on-error="${INPUT_FAIL_ON_ERROR}"
 fi
