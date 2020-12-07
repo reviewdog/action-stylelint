@@ -11,6 +11,9 @@ inputs:
   name:
     description: 'Report name'
     default: 'stylelint'
+  packages:
+    description: 'Additional NPM packages'
+    default: ''
   reporter:
     description: |
       Reporter of reviewdog command [github-pr-check,github-pr-review,github-check].

@@ -10,6 +10,7 @@ if [ ! -f "$(npm bin)/stylelint" ]; then
   npm install
 fi
 
+echo "Input packages: ${INPUT_PACKAGES}"
 if [ -n "${INPUT_PACKAGES}" ]; then
   npm install ${INPUT_PACKAGES}
 fi
