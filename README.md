@@ -15,6 +15,12 @@ code review experience.
 
 ## Inputs
 
+### `fail_on_error`
+
+Whether reviewdog should fail when errors are found. [true,false]
+This is useful for failing CI builds in addition to adding comments when errors are found.
+It's the same as the `-fail-on-error` flag of reviewdog.
+
 ### `filter_mode`
 
 Optional. Reviewdog filter mode [added, diff_context, file, nofilter]
