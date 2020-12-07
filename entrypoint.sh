@@ -17,8 +17,6 @@ fi
 $(npm bin)/stylelint --version
 
 if [ "${INPUT_REPORTER}" == 'github-pr-review' ]; then
-  $(npm bin)/stylelint "${INPUT_STYLELINT_INPUT:-'**/*.css'}" --config="${INPUT_STYLELINT_CONFIG}" --ignore-pattern="${INPUT_STYLELINT_IGNORE}" -f json \
-    | jq -r '.[] | {source: .source, warnings:.warnings[]} | "\(.source):\(.warnings.line):\(.warnings.column):\(.warnings.severity): \(.warnings.text) [\(.warnings.rule)](https://stylelint.io/user-guide/rules/\(.warnings.rule))"'
   # Use jq and github-pr-review reporter to format result to include link to rule page.
   $(npm bin)/stylelint "${INPUT_STYLELINT_INPUT:-'**/*.css'}" --config="${INPUT_STYLELINT_CONFIG}" --ignore-pattern="${INPUT_STYLELINT_IGNORE}" -f json \
     | jq -r '.[] | {source: .source, warnings:.warnings[]} | "\(.source):\(.warnings.line):\(.warnings.column):\(.warnings.severity): \(.warnings.text) [\(.warnings.rule)](https://stylelint.io/user-guide/rules/\(.warnings.rule))"' \
