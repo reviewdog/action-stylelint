@@ -8,6 +8,9 @@ inputs:
   level:
     description: 'Report level for reviewdog [info,warning,error]'
     default: 'error'
+  filter-mode:
+    description: 'Reviewdog filter mode [added, diff_context, file, nofilter]'
+    default: 'added'
   name:
     description: 'Report name'
     default: 'stylelint'
