@@ -24,6 +24,12 @@ code review experience.
 Optional. Report level for reviewdog [info,warning,error].
 It's same as `-level` flag of reviewdog.
 
+### `packages`
+Optional. Additional NPM packages to be installed, e.g.:
+```
+packages: 'stylelint-config-sass-guidelines stylelint-order'
+```
+
 ### `reporter`
 
 Reporter of reviewdog command [github-pr-check,github-pr-review,github-check].

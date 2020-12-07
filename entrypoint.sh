@@ -10,6 +10,10 @@ if [ ! -f "$(npm bin)/stylelint" ]; then
   npm install
 fi
 
+if [ -n "${INPUT_PACKAGES}" ]; then
+  npm install ${INPUT_PACKAGES}
+fi
+
 $(npm bin)/stylelint --version
 
 if [ "${INPUT_REPORTER}" == 'github-pr-review' ]; then
