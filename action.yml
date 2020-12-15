@@ -8,9 +8,18 @@ inputs:
   level:
     description: 'Report level for reviewdog [info,warning,error]'
     default: 'error'
+  fail_on_error:
+    description: 'Whether reviewdog should fail when errors are found. [true,false] - This is useful for failing CI builds.'
+    default: 'false'
+  filter_mode:
+    description: 'Reviewdog filter mode [added, diff_context, file, nofilter]'
+    default: 'added'
   name:
     description: 'Report name'
     default: 'stylelint'
+  packages:
+    description: 'Additional NPM packages'
+    default: ''
   reporter:
     description: |
       Reporter of reviewdog command [github-pr-check,github-pr-review,github-check].

@@ -15,6 +15,17 @@ code review experience.
 
 ## Inputs
 
+### `fail_on_error`
+
+Whether reviewdog should fail when errors are found. [true,false]
+This is useful for failing CI builds in addition to adding comments when errors are found.
+It's the same as the `-fail-on-error` flag of reviewdog.
+
+### `filter_mode`
+
+Optional. Reviewdog filter mode [added, diff_context, file, nofilter]
+It's the same as the `-filter-mode` flag of reviewdog.
+
 ### `github_token`
 
 **Required**. Must be in form of `github_token: ${{ secrets.github_token }}`'.
@@ -23,6 +34,12 @@ code review experience.
 
 Optional. Report level for reviewdog [info,warning,error].
 It's same as `-level` flag of reviewdog.
+
+### `packages`
+Optional. Additional NPM packages to be installed, e.g.:
+```
+packages: 'stylelint-config-sass-guidelines stylelint-order'
+```
 
 ### `reporter`
 
