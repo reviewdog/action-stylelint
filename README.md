@@ -83,7 +83,7 @@ jobs:
     name: runner / stylelint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v3
       - name: stylelint
         uses: reviewdog/action-stylelint@v1
         with:
