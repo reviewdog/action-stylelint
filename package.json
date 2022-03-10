@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/reviewdog/action-stylelint#readme",
   "devDependencies": {
-    "stylelint": "^13.0.0",
+    "stylelint": "^14.0.0",
     "stylelint-config-recommended": "^5.0.0"
   }
 }
