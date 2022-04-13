@@ -1,6 +1,5 @@
 # GitHub Action: Run stylelint with reviewdog
 
-[![Docker Image CI](https://github.com/reviewdog/action-stylelint/workflows/Docker%20Image%20CI/badge.svg)](https://github.com/reviewdog/action-stylelint/actions)
 [![depup](https://github.com/reviewdog/action-stylelint/workflows/depup/badge.svg)](https://github.com/reviewdog/action-stylelint/actions?query=workflow%3Adepup)
 [![release](https://github.com/reviewdog/action-stylelint/workflows/release/badge.svg)](https://github.com/reviewdog/action-stylelint/actions?query=workflow%3Arelease)
 [![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/reviewdog/action-stylelint?logo=github&sort=semver)](https://github.com/reviewdog/action-stylelint/releases)

@@ -1,7 +1,7 @@
 {
   "name": "action-stylelint",
   "version": "1.0.0",
-  "description": "[![Docker Image CI](https://github.com/reviewdog/action-stylelint/workflows/Docker%20Image%20CI/badge.svg)](https://github.com/reviewdog/action-stylelint/actions) [![Release](https://img.shields.io/github/release/reviewdog/action-stylelint.svg?maxAge=43200)](https://github.com/reviewdog/action-stylelint/releases)",
+  "description": "GitHub Action: Run stylelint with reviewdog",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
