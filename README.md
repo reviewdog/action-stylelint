@@ -28,7 +28,7 @@ It's the same as the `-filter-mode` flag of reviewdog.
 
 ### `github_token`
 
-**Required**. Must be in form of `github_token: ${{ secrets.github_token }}`'.
+**Required**. Default is `${{ github.token }}`.
 
 ### `level`
 
@@ -87,7 +87,6 @@ jobs:
       - name: stylelint
         uses: reviewdog/action-stylelint@v1
         with:
-          github_token: ${{ secrets.github_token }}
           reporter: github-pr-review # Change reporter.
           stylelint_input: '**/*.css'
 ```
