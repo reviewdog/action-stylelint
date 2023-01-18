@@ -33,7 +33,7 @@ if [ "${INPUT_REPORTER}" = 'github-pr-review' ]; then
 else
   $(npm bin)/stylelint "${INPUT_STYLELINT_INPUT}" --config="${INPUT_STYLELINT_CONFIG}" --ignore-pattern="${INPUT_STYLELINT_IGNORE}" -f json \
     | jq -r '.[] | {source: .source, warnings:.warnings[]} | "\(.source):\(.warnings.line):\(.warnings.column):\(.warnings.severity): \(.warnings.text)"' \
-    | reviewdog -f="stylelint" -name="${INPUT_NAME}" -reporter="${INPUT_REPORTER}" -level="${INPUT_LEVEL}" -filter-mode="${INPUT_FILTER_MODE}" -fail-on-error="${INPUT_FAIL_ON_ERROR}"
+    | reviewdog -efm="%f:%l:%c:%t%*[^:]: %m" -name="${INPUT_NAME}" -reporter="${INPUT_REPORTER}" -level="${INPUT_LEVEL}" -filter-mode="${INPUT_FILTER_MODE}" -fail-on-error="${INPUT_FAIL_ON_ERROR}"
 fi
 
 reviewdog_rc=$?
