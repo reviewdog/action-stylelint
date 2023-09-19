@@ -55,6 +55,15 @@ It's same as `[input]` of stylelint.
 
 Optional. It's same as `--config` flag of stylelint.
 
+### `stylelint_ignore_path`
+
+Optional. Default: `.stylelintignore`.
+It's same as `--ignore-path` flag of stylelint.
+
+### `stylelint_ignore`
+
+Optional. Files or glob. It's same as `--ignore-pattern` flag of stylelint.
+
 ### `workdir`
 
 Optional. The directory from which to look for and run stylelint. Default '.'

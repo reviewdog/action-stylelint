@@ -32,6 +32,9 @@ inputs:
     default: '**/*.css'
   stylelint_config:
     description: "It's same as `--config` flag of stylelint."
+  stylelint_ignore_path:
+    description: "It's same as `--ignore-path` flag of stylelint."
+    default: '.stylelintignore'
   stylelint_ignore:
     description: "Files or glob. It's the same as `--ignore-pattern` of stylelint"
   workdir:
@@ -53,6 +56,7 @@ runs:
         INPUT_REPORTER: ${{ inputs.reporter }}
         INPUT_STYLELINT_INPUT: ${{ inputs.stylelint_input }}
         INPUT_STYLELINT_CONFIG: ${{ inputs.stylelint_config }}
+        INPUT_STYLELINT_IGNORE_PATH: ${{ inputs.stylelint_ignore_path }}
         INPUT_STYLELINT_IGNORE: ${{ inputs.stylelint_ignore }}
         INPUT_WORKDIR: ${{ inputs.workdir }}
 branding:
