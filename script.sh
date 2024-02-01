@@ -20,7 +20,7 @@ __rdformat_filter() {
   output_links_filter='[\(.warnings.rule)](\(if .warnings.rule | startswith("scss/") then "https://github.com/stylelint-scss/stylelint-scss/blob/master/src/rules/\(.warnings.rule | split("scss/") | .[1])/README.md" else "https://stylelint.io/user-guide/rules/\(.warnings.rule)" end))'
 
   if [ "${INPUT_REPORTER}" = 'github-pr-review' ]; then
-    # Use jq and github-pr-review reporter to format result to include link to rule page.
+    # Format results to include link to rule page.
     echo "${input_filter} | \"${output_filter} ${output_links_filter}\""
   else
     echo "${input_filter} | \"${output_filter}\""
