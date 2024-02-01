@@ -59,7 +59,7 @@ fi
 
 if [ -n "${INPUT_PACKAGES}" ]; then
   echo '::group:: Running `npm install` to install input packages ...'
-  npm install "${INPUT_PACKAGES}"
+  npm install ${INPUT_PACKAGES}
   echo '::endgroup::'
 fi
 
