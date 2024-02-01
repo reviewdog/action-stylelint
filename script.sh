@@ -1,5 +1,45 @@
 #!/bin/sh
 
+__run_stylelint() {
+  cmd="stylelint ${INPUT_STYLELINT_INPUT} --formatter json"
+
+  if [ -n "${INPUT_STYLELINT_CONFIG}" ]; then
+    cmd="${cmd} --config='${INPUT_STYLELINT_CONFIG}'"
+  fi
+
+  if [ -n "${INPUT_STYLELINT_IGNORE}" ]; then
+    cmd="${cmd} --ignore-pattern='${INPUT_STYLELINT_IGNORE}'"
+  fi
+
+  npx --no-install -c "${cmd}"
+}
+
+__rdformat_filter() {
+  input_filter='.[] | {source: .source, warnings:.warnings[]}'
+  output_filter='\(.source):\(.warnings.line):\(.warnings.column):\(.warnings.severity): \(.warnings.text)'
+  output_links_filter='[\(.warnings.rule)](\(if .warnings.rule | startswith("scss/") then "https://github.com/stylelint-scss/stylelint-scss/blob/master/src/rules/\(.warnings.rule | split("scss/") | .[1])/README.md" else "https://stylelint.io/user-guide/rules/\(.warnings.rule)" end))'
+
+  if [ "${INPUT_REPORTER}" = 'github-pr-review' ]; then
+    # Use jq and github-pr-review reporter to format result to include link to rule page.
+    echo "${input_filter} | \"${output_filter} ${output_links_filter}\""
+  else
+    echo "${input_filter} | \"${output_filter}\""
+  fi
+}
+
+__filter_json() {
+  jq "$(__rdformat_filter)"
+}
+
+__run_reviewdog() {
+  reviewdog -efm="%f:%l:%c:%t%*[^:]: %m" \
+            -name="${INPUT_NAME}" \
+            -reporter="${INPUT_REPORTER}" \
+            -level="${INPUT_LEVEL}" \
+            -filter-mode="${INPUT_FILTER_MODE}" \
+            -fail-on-error="${INPUT_FAIL_ON_ERROR}"
+}
+
 cd "${GITHUB_WORKSPACE}/${INPUT_WORKDIR}" || exit 1
 
 TEMP_PATH="$(mktemp -d)"
@@ -19,23 +59,14 @@ fi
 
 if [ -n "${INPUT_PACKAGES}" ]; then
   echo '::group:: Running `npm install` to install input packages ...'
-  npm install ${INPUT_PACKAGES}
+  npm install "${INPUT_PACKAGES}"
   echo '::endgroup::'
 fi
 
 echo "stylelint version: $(npx --no-install -c 'stylelint --version')"
 
 echo '::group:: Running stylelint with reviewdog 🐶 ...'
-if [ "${INPUT_REPORTER}" = 'github-pr-review' ]; then
-  # Use jq and github-pr-review reporter to format result to include link to rule page.
-  npx --no-install -c "stylelint '${INPUT_STYLELINT_INPUT}' --config='${INPUT_STYLELINT_CONFIG}' --ignore-pattern='${INPUT_STYLELINT_IGNORE}' -f json" \
-    | jq -r '.[] | {source: .source, warnings:.warnings[]} | "\(.source):\(.warnings.line):\(.warnings.column):\(.warnings.severity): \(.warnings.text) [\(.warnings.rule)](\(if .warnings.rule | startswith("scss/") then "https://github.com/stylelint-scss/stylelint-scss/blob/master/src/rules/\(.warnings.rule | split("scss/") | .[1])/README.md" else "https://stylelint.io/user-guide/rules/\(.warnings.rule)" end))"' \
-    | reviewdog -efm="%f:%l:%c:%t%*[^:]: %m" -name="${INPUT_NAME}" -reporter="${INPUT_REPORTER}" -level="${INPUT_LEVEL}" -filter-mode="${INPUT_FILTER_MODE}" -fail-on-error="${INPUT_FAIL_ON_ERROR}"
-else
-  npx --no-install -c "stylelint '${INPUT_STYLELINT_INPUT}' --config='${INPUT_STYLELINT_CONFIG}' --ignore-pattern='${INPUT_STYLELINT_IGNORE}' -f json" \
-    | jq -r '.[] | {source: .source, warnings:.warnings[]} | "\(.source):\(.warnings.line):\(.warnings.column):\(.warnings.severity): \(.warnings.text)"' \
-    | reviewdog -efm="%f:%l:%c:%t%*[^:]: %m" -name="${INPUT_NAME}" -reporter="${INPUT_REPORTER}" -level="${INPUT_LEVEL}" -filter-mode="${INPUT_FILTER_MODE}" -fail-on-error="${INPUT_FAIL_ON_ERROR}"
-fi
+__run_stylelint | __filter_json | __run_reviewdog
 
 reviewdog_rc=$?
 echo '::endgroup::'
