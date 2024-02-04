@@ -33,7 +33,7 @@ module.exports = function (results, returnValue) {
         severity: warning.severity.toUpperCase(),
         code: {
           value: warning.rule,
-          url: returnValue.ruleMetadata[warning.rule]?.url
+          url: returnValue.ruleMetadata?.[warning.rule]?.url
         }
       };
 
