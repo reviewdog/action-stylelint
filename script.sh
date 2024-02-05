@@ -16,7 +16,7 @@ __run_stylelint() {
     cmd="${cmd} --ignore-pattern='${INPUT_STYLELINT_IGNORE}'"
   fi
 
-  npx --no-install -c "${cmd}"
+  npx --no-install -c "${cmd}" 2>&1
 }
 
 __run_reviewdog() {
