@@ -14,8 +14,15 @@ code review experience.
 
 ## Inputs
 
+### `fail_level`
+
+Optional. If set to `none`, always use exit code 0 for reviewdog. Otherwise, exit code 1 for reviewdog if it finds at least 1 issue with severity greater than or equal to the given level.
+Possible values: [`none`, `any`, `info`, `warning`, `error`]
+Default is `none`.
+
 ### `fail_on_error`
 
+Deprecated, use `fail_level` instead.
 Whether reviewdog should fail when errors are found. [true,false]
 This is useful for failing CI builds in addition to adding comments when errors are found.
 It's the same as the `-fail-on-error` flag of reviewdog.
