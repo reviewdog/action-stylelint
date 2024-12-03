@@ -25,6 +25,7 @@ __run_reviewdog() {
             -reporter="${INPUT_REPORTER}" \
             -level="${INPUT_LEVEL}" \
             -filter-mode="${INPUT_FILTER_MODE}" \
+            -fail-level="${INPUT_FAIL_LEVEL}" \
             -fail-on-error="${INPUT_FAIL_ON_ERROR}"
 }
 
