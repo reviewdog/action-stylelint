@@ -90,9 +90,9 @@ jobs:
     name: runner / stylelint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
       - name: stylelint
-        uses: reviewdog/action-stylelint@v1
+        uses: reviewdog/action-stylelint@dd2b435cc6a7c82705307a9dee740c9bbaa10411 # v1.30.2
         with:
           reporter: github-pr-review # Change reporter.
           stylelint_input: '**/*.css'
