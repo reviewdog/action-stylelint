@@ -51,7 +51,7 @@ runs:
     - run: $GITHUB_ACTION_PATH/script.sh
       shell: bash
       env:
-        REVIEWDOG_VERSION: v0.20.2
+        REVIEWDOG_VERSION: v0.20.3
         INPUT_GITHUB_TOKEN: ${{ inputs.github_token }}
         INPUT_LEVEL: ${{ inputs.level }}
         INPUT_FAIL_LEVEL: ${{ inputs.fail_level }}
